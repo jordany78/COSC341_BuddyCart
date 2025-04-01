@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private Fragment remoteShopperHome;
     private Fragment chatHome;
 
+    private boolean hasNotification = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +36,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomMenuBar = findViewById(R.id.bottom_navigation);
-
+        bottomMenuBar.setItemIconTintList(null); // Notification isn't red otherwise
 
         buddyShopperHome = new BuddyShopperHome();
         remoteShopperHome = new RemoteShopperHome();
         chatHome = new ChatHome();
 
+        updateChatIcon();
 
         bottomMenuBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -48,17 +51,21 @@ public class MainActivity extends AppCompatActivity {
 
                 int id = item.getItemId();
 
-                if (item.getItemId() == R.id.menu_buddy_shopper) {
+                if (id == R.id.menu_buddy_shopper) {
 
                     selectedFragment = buddyShopperHome;
 
-                } else if (item.getItemId() == R.id.menu_remote_shopper) {
+                } else if (id == R.id.menu_remote_shopper) {
 
                     selectedFragment = remoteShopperHome;
 
-                } else if (item.getItemId() == R.id.menu_chat) {
+                } else if (id == R.id.menu_chat) {
 
                     selectedFragment = chatHome;
+
+                    // Reset chat icon
+                    hasNotification = false;
+                    updateChatIcon();
 
                 }
 
@@ -88,6 +95,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Show selected
         getSupportFragmentManager().beginTransaction().show(selectedFragment).commit();
+    }
+
+    public void listApproved() { // EXAMPLE FUNCTION FOR LIST APPROVAL
+            hasNotification = true;
+            updateChatIcon();
+    }
+
+    private void updateChatIcon() {
+        MenuItem chatIcon = bottomMenuBar.getMenu().findItem(R.id.menu_chat);
+        if (hasNotification) {
+            chatIcon.setIcon(R.drawable.chat_notification);
+        } else {
+            chatIcon.setIcon(R.drawable.chat);
+        }
     }
 }
 
