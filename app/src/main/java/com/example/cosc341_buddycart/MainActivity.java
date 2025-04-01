@@ -1,14 +1,26 @@
 package com.example.cosc341_buddycart;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomMenuBar;
+
+    private Fragment buddyShopperHome;
+    private Fragment remoteShopperHome;
+    private Fragment chatHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +33,62 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //This is a test
+        bottomMenuBar = findViewById(R.id.bottom_navigation);
+
+
+        buddyShopperHome = new BuddyShopperHome();
+        remoteShopperHome = new RemoteShopperHome();
+        chatHome = new ChatHome();
+
+
+        bottomMenuBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+
+                int id = item.getItemId();
+
+                if (item.getItemId() == R.id.menu_buddy_shopper) {
+
+                    selectedFragment = buddyShopperHome;
+
+                } else if (item.getItemId() == R.id.menu_remote_shopper) {
+
+                    selectedFragment = remoteShopperHome;
+
+                } else if (item.getItemId() == R.id.menu_chat) {
+
+                    selectedFragment = chatHome;
+
+                }
+
+                if (selectedFragment != null) {
+                    showFragment(selectedFragment);
+                }
+
+                return true;
+
+            }
+        });
+
+        // Initialization
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, buddyShopperHome)
+                    .add(R.id.fragment_container, chatHome)
+                    .add(R.id.fragment_container, remoteShopperHome)
+                    .hide(buddyShopperHome) // Only show remote fragment on initialization
+                    .hide(chatHome)
+                    .commit();
+        }
+    }
+
+    private void showFragment(Fragment selectedFragment) {
+        // Hide other fragments
+        getSupportFragmentManager().beginTransaction().hide(buddyShopperHome).hide(remoteShopperHome).hide(chatHome).commit();
+
+        // Show selected
+        getSupportFragmentManager().beginTransaction().show(selectedFragment).commit();
     }
 }
+
+
