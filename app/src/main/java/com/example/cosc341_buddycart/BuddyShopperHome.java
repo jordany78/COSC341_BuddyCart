@@ -3,6 +3,7 @@ package com.example.cosc341_buddycart;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BuddyShopperHome extends Fragment {
+
+    private SharingViewModel viewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +62,13 @@ public class BuddyShopperHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buddy_shopper_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_remote_shopper_home, container, false);
+
+        // View Model for passing data -> copy this to share data between fragments!
+
+        viewModel = new ViewModelProvider(requireActivity()).get(SharingViewModel.class);
+
+
+        return view;
     }
 }
