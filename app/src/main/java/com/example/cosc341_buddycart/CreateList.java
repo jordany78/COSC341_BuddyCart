@@ -45,13 +45,13 @@ public class CreateList extends AppCompatActivity {
         // Submit List Button
         findViewById(R.id.button_submit_list).setOnClickListener(v -> {
             String listName = editTextListName.getText().toString();
-            if (listName.isEmpty()) {
-                Toast.makeText(this, "Please enter a list name", Toast.LENGTH_SHORT).show();
-                return;
+            if (!listName.isEmpty()) {
+                ShoppingList newList = new ShoppingList(listName, itemList);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("newList", newList);
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
-
-            // Save the list (implement your logic here)
-            saveShoppingList(listName, itemList);
         });
     }
 

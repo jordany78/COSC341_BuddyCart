@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItem" />
+        <activity android:name=".MyLists" />
 
     </application>
 

@@ -88,10 +88,9 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        Button buttonCreateList = findViewById(R.id.button_create_list);
-        buttonCreateList.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CreateList.class);
-            startActivity(intent);
+        Button buttonMyLists = findViewById(R.id.button_my_lists);
+        buttonMyLists.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, MyLists.class));
         });
     }
 
