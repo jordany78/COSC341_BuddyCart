@@ -1,5 +1,6 @@
 package com.example.cosc341_buddycart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -85,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                     .hide(chatHome)
                     .commit();
         }
+
+        Button buttonCreateList = findViewById(R.id.button_create_list);
+        buttonCreateList.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateList.class);
+            startActivity(intent);
+        });
     }
 
     private void showFragment(Fragment selectedFragment) {
