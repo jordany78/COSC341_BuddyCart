@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         remoteShopperHome = new RemoteShopperHome();
         chatHome = new ChatHome();
 
-        updateChatIcon();
-
         bottomMenuBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

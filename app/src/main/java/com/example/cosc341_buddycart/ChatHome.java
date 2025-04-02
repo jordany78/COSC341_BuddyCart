@@ -62,7 +62,7 @@ public class ChatHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_remote_shopper_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_home, container, false);
 
         // View Model for passing data -> copy this to share data between fragments!
 

@@ -5,9 +5,12 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
  */
 public class BuddyShopperHome extends Fragment {
 
+    private Button approveButton;
     private SharingViewModel viewModel;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -62,12 +66,31 @@ public class BuddyShopperHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_remote_shopper_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_buddy_shopper_home, container, false);
 
         // View Model for passing data -> copy this to share data between fragments!
 
         viewModel = new ViewModelProvider(requireActivity()).get(SharingViewModel.class);
 
+        approveButton = view.findViewById(R.id.approveButton);
+
+        approveButton.setOnClickListener(new View.OnClickListener() { // THIS IS JUST A DEMO
+            @Override
+            public void onClick(View v) {
+                Boolean isSubmitted = (Boolean) viewModel.getData("isSubmitted").getValue(); // Gets it from RemoteShopperHome
+
+                if(isSubmitted != null && isSubmitted) {
+
+                    // Toast at top of screen
+                    Toast.makeText(view.getContext(), "Your list has been approved!", Toast.LENGTH_SHORT).show();
+
+                    if ((MainActivity) getActivity() != null) { // Call funct. in main activity
+                        ((MainActivity) getActivity()).listApproved();
+                    }
+
+                }
+            }
+        });
 
         return view;
     }
