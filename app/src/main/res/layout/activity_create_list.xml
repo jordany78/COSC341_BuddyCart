@@ -5,12 +5,25 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <ImageButton
+        android:id="@+id/btn_back_create_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Back" />
+
     <!-- List Name Input -->
     <EditText
         android:id="@+id/editText_list_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/btn_back_create_list"
+        android:layout_marginStart="8dp"
         android:hint="My List Name"
         android:inputType="textCapWords"
         android:textSize="18sp" />
