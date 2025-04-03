@@ -1,10 +1,13 @@
 package com.example.cosc341_buddycart;
 
+import static android.app.PendingIntent.getActivity;
 import static android.text.TextUtils.isEmpty;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -113,7 +117,7 @@ public class RealTimeChat extends AppCompatActivity {
             }
         });
 
-        // Set up button listeners
+        // Set up back button listener
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +125,7 @@ public class RealTimeChat extends AppCompatActivity {
             }
         });
 
+        // Send button listener
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +134,7 @@ public class RealTimeChat extends AppCompatActivity {
         });
     }
 
-    // user message is sent!
+    // User message is sent!
     private void sendMessage() {
         String text = messageEditText.getText().toString().trim();
         if (isEmpty(text)) {
@@ -147,5 +152,58 @@ public class RealTimeChat extends AppCompatActivity {
 
         // Reset edit text
         messageEditText.setText("");
+    }
+
+    public void beginTransaction(View view)
+    {
+        Intent intent = new Intent(this, PaymentActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void reportConversation(View view) {
+
+        // 1. Instantiate an AlertDialog.Builder with its constructor.
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Get the layout inflater.
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        View dialogView = inflater.inflate(R.layout.dialog_report_user, null);
+
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        // Dialog background set to transparent, so rounded corners show
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+        Button cancelButton = (Button) dialogView.findViewById(R.id.cancelButton);
+
+        Button confirmButton = (Button) dialogView.findViewById(R.id.confirmButton);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                dialog.dismiss();
+                Toast.makeText(v.getContext(), "User reported.", Toast.LENGTH_SHORT).show();
+                // Actually reporting users is beyond the scope of this project.
+
+            }
+        });
+
+        dialog.show();
+
+
     }
 }
