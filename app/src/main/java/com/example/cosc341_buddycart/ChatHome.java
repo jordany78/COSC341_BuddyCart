@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -28,6 +29,8 @@ public class ChatHome extends Fragment {
     private ListView listView;
 
     private Fragment realTimeChatFragment;
+
+    //ArrayList<String> conversations; USE AN ARRAY LIST FOR ADDING NEW CHATS ONCE TASK #3 IS DONE
 
     public String conversations[] = { // REPLACE WITH LIST NAMES
             "Chat 1",

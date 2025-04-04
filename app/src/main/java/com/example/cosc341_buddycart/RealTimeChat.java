@@ -27,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -132,6 +133,11 @@ public class RealTimeChat extends AppCompatActivity {
                 sendMessage();
             }
         });
+
+        if(messageList.size() == 0)
+        {
+            sendDefaultMessage();
+        }
     }
 
     // User message is sent!
@@ -154,17 +160,38 @@ public class RealTimeChat extends AppCompatActivity {
         messageEditText.setText("");
     }
 
+    private void sendDefaultMessage() {
+
+        String currentUserId = "1";  // FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String currentUserName = "User Name"; // Replace with other user name
+
+        // REPLACE WITH ACTUAL VARIABLE OF NUMBER OF ITEMS THAT CAN BE FULFILLED
+        Message message = new Message("This user can fulfill 5/5 of your items! You can now begin chatting.", currentUserId, currentUserName, System.currentTimeMillis());
+
+        // Push to firebase database
+        databaseReference.push().setValue(message);
+    }
+
     public void beginTransaction(View view)
     {
         Intent intent = new Intent(this, PaymentActivity.class);
         startActivity(intent);
+
+        String mapUserId = "3";  // FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String currentUserName = "System"; // Replace with user name
+        LatLng buddyLocation = new LatLng(49.888909300446734, -119.42519166832315); // REPLACE WITH ACTUAL USER AND STORE LOCATIONS
+        LatLng remoteLocation =  new LatLng(49.890070382170435, -119.42679948738417);
+
+        Message message = new Message("Your buddy will be here soon!", mapUserId, currentUserName, System.currentTimeMillis(),
+                buddyLocation.latitude, buddyLocation.longitude,  remoteLocation.latitude, remoteLocation.longitude);
+
+        databaseReference.push().setValue(message);
     }
 
 
     public void reportConversation(View view) {
 
         // 1. Instantiate an AlertDialog.Builder with its constructor.
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         // Get the layout inflater.
@@ -178,7 +205,6 @@ public class RealTimeChat extends AppCompatActivity {
 
         // Dialog background set to transparent, so rounded corners show
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
 
         Button cancelButton = (Button) dialogView.findViewById(R.id.cancelButton);
 
