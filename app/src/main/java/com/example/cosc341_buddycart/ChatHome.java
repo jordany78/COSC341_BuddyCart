@@ -1,5 +1,6 @@
 package com.example.cosc341_buddycart;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,14 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +26,16 @@ import android.view.ViewGroup;
 public class ChatHome extends Fragment {
 
     private SharingViewModel viewModel;
+    private ListView listView;
+
+    private Fragment realTimeChatFragment;
+
+    //ArrayList<String> conversations; USE AN ARRAY LIST FOR ADDING NEW CHATS ONCE TASK #3 IS DONE
+
+    public String conversations[] = { // REPLACE WITH LIST NAMES
+            "Chat 1",
+            "Chat 2",
+    };
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,8 +84,29 @@ public class ChatHome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chat_home, container, false);
 
         // View Model for passing data -> copy this to share data between fragments!
-
         viewModel = new ViewModelProvider(requireActivity()).get(SharingViewModel.class);
+        listView = view.findViewById(R.id.listView); // Don't forget to include the view. otherwise findViewById won't work
+
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, Arrays.asList(conversations));
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+
+                String selectedChat = listView.getItemAtPosition(position).toString();
+
+                Intent intent = new Intent(getActivity(), RealTimeChat.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("chatId", selectedChat);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
         return view;
     }
