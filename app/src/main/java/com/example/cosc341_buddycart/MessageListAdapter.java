@@ -119,8 +119,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             googleMap.addMarker(new MarkerOptions().position(buddyLocation));
 
-            // User location marker should look distinct (blue marker)
-            googleMap.addMarker(new MarkerOptions().position(remoteLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+            // User location marker should look distinct (yellow marker)
+            googleMap.addMarker(new MarkerOptions().position(remoteLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
 
             // Move camera to buddy
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(buddyLocation, 15));

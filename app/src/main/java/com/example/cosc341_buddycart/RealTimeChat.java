@@ -33,6 +33,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,10 +135,19 @@ public class RealTimeChat extends AppCompatActivity {
             }
         });
 
-        if(messageList.size() == 0)
-        {
-            sendDefaultMessage();
-        }
+        // Now it has to check if the firebase database chat is empty first
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.hasChildren()) {
+                    sendDefaultMessage();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     // User message is sent!
@@ -172,18 +182,17 @@ public class RealTimeChat extends AppCompatActivity {
         databaseReference.push().setValue(message);
     }
 
-    public void beginTransaction(View view)
-    {
+    public void beginTransaction(View view) {
         Intent intent = new Intent(this, PaymentActivity.class);
         startActivity(intent);
 
         String mapUserId = "3";  // FirebaseAuth.getInstance().getCurrentUser().getUid();
         String currentUserName = "System"; // Replace with user name
         LatLng buddyLocation = new LatLng(49.888909300446734, -119.42519166832315); // REPLACE WITH ACTUAL USER AND STORE LOCATIONS
-        LatLng remoteLocation =  new LatLng(49.890070382170435, -119.42679948738417);
+        LatLng remoteLocation = new LatLng(49.890070382170435, -119.42679948738417);
 
         Message message = new Message("Your buddy will be here soon!", mapUserId, currentUserName, System.currentTimeMillis(),
-                buddyLocation.latitude, buddyLocation.longitude,  remoteLocation.latitude, remoteLocation.longitude);
+                buddyLocation.latitude, buddyLocation.longitude, remoteLocation.latitude, remoteLocation.longitude);
 
         databaseReference.push().setValue(message);
     }
