@@ -28,43 +28,28 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />  <!-- INSERT YOUR OWN API KEY -->
 
+
         <activity
-            android:name=".MapsActivityTest"
-            android:exported="false"
-            android:label="@string/title_activity_maps_test" />
-        <activity
-            android:name=".PaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RealTimeChat"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" >
+            android:name=".WelcomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListsActivity"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".CreateListActivity"
-            android:parentActivityName=".ListsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListsActivity" />
-        </activity>
-        <activity android:name=".AddItemActivity"
-            android:parentActivityName=".CreateListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CreateListActivity" />
-        </activity>
+
+        <!-- Other Activities -->
+        <activity android:name=".LocationActivity" />
+        <activity android:name=".StoreSelectionActivity" />
+        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ListsActivity" />
+        <activity android:name=".CreateListActivity" />
+        <activity android:name=".AddItemActivity" />
+        <activity android:name=".MapsActivityTest" />
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".RealTimeChat" />
+
     </application>
 
 </manifest>
