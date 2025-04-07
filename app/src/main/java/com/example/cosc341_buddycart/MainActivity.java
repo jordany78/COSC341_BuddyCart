@@ -2,7 +2,9 @@ package com.example.cosc341_buddycart;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -17,11 +20,9 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomMenuBar;
-
     private Fragment buddyShopperHome;
     private Fragment remoteShopperHome;
     private Fragment chatHome;
-
     private boolean hasNotification = true;
 
     @Override
@@ -34,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Top toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("BuddyCart");
+        }
 
         bottomMenuBar = findViewById(R.id.bottom_navigation);
         bottomMenuBar.setItemIconTintList(null); // Notification isn't red otherwise
@@ -85,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                     .hide(chatHome)
                     .commit();
         }
+
+        Button myListsButton = findViewById(R.id.my_lists_button);
+        myListsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ListsActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void showFragment(Fragment selectedFragment) {
