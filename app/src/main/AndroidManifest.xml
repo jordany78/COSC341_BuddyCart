@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LocationActivity" />
         <activity android:name=".StoreSelectionActivity" />
         <activity android:name=".ConfirmationActivity" />
 

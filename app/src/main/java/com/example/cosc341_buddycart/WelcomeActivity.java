@@ -13,7 +13,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Button startButton = findViewById(R.id.startShoppingButton);
         startButton.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this, LocationActivity.class);
             startActivity(intent);
         });
     }

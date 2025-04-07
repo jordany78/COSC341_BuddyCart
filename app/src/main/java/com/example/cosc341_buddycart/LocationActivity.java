@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LocationActivity extends AppCompatActivity {
 
     EditText locationInput;
     Button nextButton, useLocationButton;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             if (location.isEmpty()) {
                 Toast.makeText(this, "Please enter your location", Toast.LENGTH_SHORT).show();
             } else {
-                Intent intent = new Intent(MainActivity.this, StoreSelectionActivity.class);
+                Intent intent = new Intent(LocationActivity.this, StoreSelectionActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }
