@@ -6,18 +6,22 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
+    <!-- EditText for entering a location -->
     <EditText
         android:id="@+id/locationInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter your location"
-        android:inputType="textPostalAddress"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"
-        android:padding="12dp" />
+        android:hint="Enter your location"
+        android:importantForAccessibility="yes"
+        android:inputType="textPostalAddress"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!-- Button to use current location -->
     <Button
         android:id="@+id/useLocationButton"
         android:layout_width="wrap_content"
@@ -26,8 +30,11 @@
         app:layout_constraintTop_toBottomOf="@id/locationInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Button to use current location" />
 
+    <!-- Button to proceed to the next activity -->
     <Button
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
@@ -36,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/useLocationButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-
+        android:layout_marginTop="16dp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Proceed to the next screen" />
 </androidx.constraintlayout.widget.ConstraintLayout>

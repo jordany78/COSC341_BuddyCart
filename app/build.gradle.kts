@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation (libs.gson)
     implementation (libs.recyclerview)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
