@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/shoppingListsFragment">
+
+    <fragment
+        android:id="@+id/shoppingListsFragment"
+        android:name="com.buddyshopper.fragments.ShoppingListsFragment"
+        android:label="Shopping Lists">
+        <action
+            android:id="@+id/action_lists_to_details"
+            app:destination="@id/listDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listDetailsFragment"
+        android:name="com.buddyshopper.fragments.ListDetailsFragment"
+        android:label="List Details">
+        <argument
+            android:name="listPosition"
+            app:argType="integer" />
+    </fragment>
+
+</navigation> 
